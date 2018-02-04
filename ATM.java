@@ -49,6 +49,32 @@ public class ATM extends JFrame {
         }
       }
     });
+
+    deposit.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        if (isDouble(amount.getText())) {
+          JOptionPane.showMessageDialog(new JFrame(), "Money has been added to your account!", "Deposit Successfull!", JOptionPane.WARNING_MESSAGE);
+        } else {
+          JOptionPane.showMessageDialog(new JFrame(), "Please enter a numerical amount!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    transfer.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        if (isDouble(amount.getText())) {
+          JOptionPane.showMessageDialog(new JFrame(), "Verifying funds!", "Checking!", JOptionPane.WARNING_MESSAGE);
+        } else {
+          JOptionPane.showMessageDialog(new JFrame(), "Please enter a numerical amount!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
+        }
+      }
+    });
+
+    balance.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        JOptionPane.showMessageDialog(new JFrame(), "Here is your balance!", "Balance!", JOptionPane.WARNING_MESSAGE);
+      }
+    });
   }
 
   public static boolean isDouble(String s){
