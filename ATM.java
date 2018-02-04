@@ -40,8 +40,12 @@ public class ATM extends JFrame {
         if (isDouble(amount.getText())) {
           Double amountDouble = Double.parseDouble(amount.getText());
           if ((amountDouble % 20) == 0) {
-            System.out.println("It's divisible by 20");
+            JOptionPane.showMessageDialog(new JFrame(), "Please take your money!", "Withdraw Successful!", JOptionPane.WARNING_MESSAGE);
+          } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Please enter a multiple of 20!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
           }
+        } else {
+          JOptionPane.showMessageDialog(new JFrame(), "Pleae enter a numerical amount!", "Invalid Entry", JOptionPane.WARNING_MESSAGE);
         }
       }
     });
