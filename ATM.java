@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class ATM extends JFrame {
   public ATM(){
@@ -34,7 +35,22 @@ public class ATM extends JFrame {
     pack();
     setVisible(true);
 
-    
+    withdraw.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e){
+        if (isDouble(amount.getText())) {
+          System.out.println("is a number");
+        }
+      }
+    });
+  }
+
+  public static boolean isDouble(String s){
+    try{
+      Double.parseDouble(s);
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
+    }
   }
 
   public static void main(String args[]){
