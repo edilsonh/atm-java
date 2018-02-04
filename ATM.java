@@ -38,7 +38,10 @@ public class ATM extends JFrame {
     withdraw.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e){
         if (isDouble(amount.getText())) {
-          System.out.println("is a number");
+          Double amountDouble = Double.parseDouble(amount.getText());
+          if ((amountDouble % 20) == 0) {
+            System.out.println("It's divisible by 20");
+          }
         }
       }
     });
