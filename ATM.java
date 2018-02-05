@@ -60,6 +60,12 @@ public class ATM extends JFrame {
     deposit.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e){
         if (isDouble(amount.getText())) {
+          Double amountDouble = Double.parseDouble(amount.getText());
+          if (checking.isSelected()) {
+            checkingAccount.Deposit(amountDouble);
+          } else {
+            savingsAccount.Deposit(amountDouble);
+          }
           JOptionPane.showMessageDialog(new JFrame(), "Money has been added to your account!", "Deposit Successfull!", JOptionPane.WARNING_MESSAGE);
         } else {
           JOptionPane.showMessageDialog(new JFrame(), "Please enter a numerical amount!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
@@ -70,7 +76,15 @@ public class ATM extends JFrame {
     transfer.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e){
         if (isDouble(amount.getText())) {
-          JOptionPane.showMessageDialog(new JFrame(), "Verifying funds!", "Checking!", JOptionPane.WARNING_MESSAGE);
+          Double amountDouble = Double.parseDouble(amount.getText());
+          if (checking.isSelected()) {
+            checkingAccount.Deposit(amountDouble);
+            savingsAccount.Withdraw(amountDouble);
+          } else {
+            savingsAccount.Deposit(amountDouble);
+            checkingAccount.Withdraw(amountDouble);
+          }
+          JOptionPane.showMessageDialog(new JFrame(), "Money has been transferred!", "Transfer!", JOptionPane.WARNING_MESSAGE);
         } else {
           JOptionPane.showMessageDialog(new JFrame(), "Please enter a numerical amount!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
         }
@@ -101,6 +115,6 @@ public class ATM extends JFrame {
   }
 
   public static void main(String args[]){
-    ATM atm = new ATM(3000, 6750);
+    ATM atm = new ATM(3000, 6700);
   }
 }
