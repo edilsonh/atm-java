@@ -7,12 +7,18 @@ public class Account {
     money = startMoney;
   }
 
-  public void Withdraw(double amount){
-    if (totalWithdrawals > 4) {
-      money -= 1.50;
+  public void Withdraw(double amount) throws InsufficientFunds{
+    if (amount < this.money) {
+      if (totalWithdrawals > 4) {
+        money -= 1.50;
+      }
+      money -= amount;
+      totalWithdrawals += 1;
+    } else {
+      throw new InsufficientFunds(
+        "Not enough money"
+      );
     }
-    money -= amount;
-    totalWithdrawals += 1;
   }
 
   public void Deposit(double amount){

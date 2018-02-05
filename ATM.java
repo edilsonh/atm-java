@@ -1,3 +1,11 @@
+/*
+* File: ATM.java
+* Author: Edilson Hernandez
+* Date: February 4, 2018
+* Purpose: The purpose of this program is simulate an ATM. It perform four basic
+* functions of Withdraw, Deposit, Transfer, and check Balance.
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -42,12 +50,18 @@ public class ATM extends JFrame {
         if (isDouble(amount.getText())) {
           Double amountDouble = Double.parseDouble(amount.getText());
           if ((amountDouble % 20) == 0) {
-            if (checking.isSelected()) {
-              checkingAccount.Withdraw(amountDouble);
-            } else {
-              savingsAccount.Withdraw(amountDouble);
+            try {
+              if (checking.isSelected()) {
+                checkingAccount.Withdraw(amountDouble);
+                JOptionPane.showMessageDialog(new JFrame(), "Please take your money!", "Withdraw Successful!", JOptionPane.WARNING_MESSAGE);
+              } else {
+                savingsAccount.Withdraw(amountDouble);
+                JOptionPane.showMessageDialog(new JFrame(), "Please take your money!", "Withdraw Successful!", JOptionPane.WARNING_MESSAGE);
+              }
+            } catch (InsufficientFunds isf) {
+              System.out.println(isf);
+              JOptionPane.showMessageDialog(new JFrame(), "Your account did not have enough money to make this withdrawal!", "Not enough funds!!", JOptionPane.WARNING_MESSAGE);
             }
-            JOptionPane.showMessageDialog(new JFrame(), "Please take your money!", "Withdraw Successful!", JOptionPane.WARNING_MESSAGE);
           } else {
             JOptionPane.showMessageDialog(new JFrame(), "Please enter a multiple of 20!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
           }
@@ -77,14 +91,20 @@ public class ATM extends JFrame {
       public void actionPerformed(ActionEvent e){
         if (isDouble(amount.getText())) {
           Double amountDouble = Double.parseDouble(amount.getText());
-          if (checking.isSelected()) {
-            checkingAccount.Deposit(amountDouble);
-            savingsAccount.Withdraw(amountDouble);
-          } else {
-            savingsAccount.Deposit(amountDouble);
-            checkingAccount.Withdraw(amountDouble);
+          try {
+            if (checking.isSelected()) {
+              checkingAccount.Deposit(amountDouble);
+              savingsAccount.Withdraw(amountDouble);
+              JOptionPane.showMessageDialog(new JFrame(), "Money has been transferred!", "Transfer!", JOptionPane.WARNING_MESSAGE);
+            } else {
+              savingsAccount.Deposit(amountDouble);
+              checkingAccount.Withdraw(amountDouble);
+              JOptionPane.showMessageDialog(new JFrame(), "Money has been transferred!", "Transfer!", JOptionPane.WARNING_MESSAGE);
+            }
+          } catch (InsufficientFunds isf) {
+            System.out.println(isf);
+            JOptionPane.showMessageDialog(new JFrame(), "Your account did not have enough money to make this transfer!", "Not enough funds!!", JOptionPane.WARNING_MESSAGE);
           }
-          JOptionPane.showMessageDialog(new JFrame(), "Money has been transferred!", "Transfer!", JOptionPane.WARNING_MESSAGE);
         } else {
           JOptionPane.showMessageDialog(new JFrame(), "Please enter a numerical amount!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
         }
