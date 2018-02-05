@@ -11,6 +11,10 @@ public class Account {
     money -= amount;
   }
 
+  public void Deposit(double amount){
+    money += amount;
+  }
+
   public double Balance(){
     return money;
   }

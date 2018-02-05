@@ -3,8 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ATM extends JFrame {
-  public ATM(double checkingInitialAmount){
+  public ATM(double checkingInitialAmount, double savingsInitialAmount){
     Account checkingAccount= new Account(checkingInitialAmount);
+    Account savingsAccount = new Account(savingsInitialAmount);
     setTitle("ATM");
     setSize(800, 800);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +42,11 @@ public class ATM extends JFrame {
         if (isDouble(amount.getText())) {
           Double amountDouble = Double.parseDouble(amount.getText());
           if ((amountDouble % 20) == 0) {
-            checkingAccount.Withdraw(amountDouble);
+            if (checking.isSelected()) {
+              checkingAccount.Withdraw(amountDouble);
+            } else {
+              savingsAccount.Withdraw(amountDouble);
+            }
             JOptionPane.showMessageDialog(new JFrame(), "Please take your money!", "Withdraw Successful!", JOptionPane.WARNING_MESSAGE);
           } else {
             JOptionPane.showMessageDialog(new JFrame(), "Please enter a multiple of 20!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
@@ -74,8 +79,14 @@ public class ATM extends JFrame {
 
     balance.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e){
-        String currentBalance = "Your balance is $" + checkingAccount.Balance();
-        JOptionPane.showMessageDialog(new JFrame(), currentBalance, "Balance!", JOptionPane.WARNING_MESSAGE);
+        double currentBalance = 0;
+        if (checking.isSelected()) {
+          currentBalance = checkingAccount.Balance();
+        } else {
+          currentBalance = savingsAccount.Balance();
+        }
+        String balanceText = "Your balance is $" + currentBalance;
+        JOptionPane.showMessageDialog(new JFrame(), balanceText, "Balance!", JOptionPane.WARNING_MESSAGE);
       }
     });
   }
@@ -90,6 +101,6 @@ public class ATM extends JFrame {
   }
 
   public static void main(String args[]){
-    ATM atm = new ATM(3000);
+    ATM atm = new ATM(3000, 6750);
   }
 }
