@@ -58,7 +58,7 @@ public class ATM extends JFrame {
                 savingsAccount.Withdraw(amountDouble);
                 JOptionPane.showMessageDialog(new JFrame(), "Please take your money!", "Withdraw Successful!", JOptionPane.WARNING_MESSAGE);
               }
-            } catch (InsufficientFunds isf) {
+            } catch (InsufficientFundsException isf) {
               System.out.println(isf);
               JOptionPane.showMessageDialog(new JFrame(), "Your account did not have enough money to make this withdrawal!", "Not enough funds!!", JOptionPane.WARNING_MESSAGE);
             }
@@ -101,7 +101,7 @@ public class ATM extends JFrame {
               checkingAccount.Withdraw(amountDouble);
               JOptionPane.showMessageDialog(new JFrame(), "Money has been transferred!", "Transfer!", JOptionPane.WARNING_MESSAGE);
             }
-          } catch (InsufficientFunds isf) {
+          } catch (InsufficientFundsException isf) {
             System.out.println(isf);
             JOptionPane.showMessageDialog(new JFrame(), "Your account did not have enough money to make this transfer!", "Not enough funds!!", JOptionPane.WARNING_MESSAGE);
           }

@@ -7,7 +7,7 @@ public class Account {
     money = startMoney;
   }
 
-  public void Withdraw(double amount) throws InsufficientFunds{
+  public void Withdraw(double amount) throws InsufficientFundsException{
     if (amount < this.money) {
       if (totalWithdrawals > 4) {
         money -= 1.50;
@@ -15,7 +15,7 @@ public class Account {
       money -= amount;
       totalWithdrawals += 1;
     } else {
-      throw new InsufficientFunds(
+      throw new InsufficientFundsException(
         "Not enough money"
       );
     }
