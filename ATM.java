@@ -3,7 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ATM extends JFrame {
-  public ATM(){
+  public ATM(double checkingInitialAmount){
+    Account checkingAccount= new Account(checkingInitialAmount);
     setTitle("ATM");
     setSize(800, 800);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,6 +41,7 @@ public class ATM extends JFrame {
         if (isDouble(amount.getText())) {
           Double amountDouble = Double.parseDouble(amount.getText());
           if ((amountDouble % 20) == 0) {
+            checkingAccount.Withdraw(amountDouble);
             JOptionPane.showMessageDialog(new JFrame(), "Please take your money!", "Withdraw Successful!", JOptionPane.WARNING_MESSAGE);
           } else {
             JOptionPane.showMessageDialog(new JFrame(), "Please enter a multiple of 20!", "Invalid Entry!", JOptionPane.WARNING_MESSAGE);
@@ -72,7 +74,8 @@ public class ATM extends JFrame {
 
     balance.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e){
-        JOptionPane.showMessageDialog(new JFrame(), "Here is your balance!", "Balance!", JOptionPane.WARNING_MESSAGE);
+        String currentBalance = "Your balance is $" + checkingAccount.Balance();
+        JOptionPane.showMessageDialog(new JFrame(), currentBalance, "Balance!", JOptionPane.WARNING_MESSAGE);
       }
     });
   }
@@ -87,6 +90,6 @@ public class ATM extends JFrame {
   }
 
   public static void main(String args[]){
-    ATM atm = new ATM();
+    ATM atm = new ATM(3000);
   }
 }

@@ -7,5 +7,11 @@ public class Account {
     money = startMoney;
   }
 
-  
+  public void Withdraw(double amount){
+    money -= amount;
+  }
+
+  public double Balance(){
+    return money;
+  }
 }
